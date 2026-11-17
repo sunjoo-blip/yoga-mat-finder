@@ -533,6 +533,16 @@ a {
   color: var(--sub);
 }
 
+.tips {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-family: var(--hand);
+  font-size: 19px;
+  line-height: 1.35;
+}
+
 .cta {
   display: flex;
   flex-direction: column;

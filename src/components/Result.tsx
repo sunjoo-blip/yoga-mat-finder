@@ -1,9 +1,9 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { PRICE_LABEL, buyLink } from "@/data/mats";
+import { buyLink, priceText, type Mat } from "@/data/mats";
 import { QUESTIONS } from "@/data/questions";
-import type { QuizResult, ScoredMat } from "@/lib/scoring";
+import { resolveOptions, type QuizResult, type ScoredMat } from "@/lib/scoring";
 import { obudUrl, track } from "@/lib/track";
 import MatVisual from "./MatVisual";
 
@@ -93,6 +93,13 @@ export default function Result({ result, answers, name, onRetry }: Props) {
         )}
       </div>
 
+      <h3 className="section-title">알아두면 좋은 팁</h3>
+      <ul className="tips">
+        {getTips(best.mat, resolveOptions(answers).map((o) => o.id)).map((t) => (
+          <li key={t}>{t}</li>
+        ))}
+      </ul>
+
       <a
         className="cta"
         href={obudUrl(best.mat.id)}
@@ -117,8 +124,8 @@ export default function Result({ result, answers, name, onRetry }: Props) {
       </div>
 
       <p className="disclaimer">
-        추천은 일반적인 소재 특성을 바탕으로 한 참고용이에요. 브랜드 제휴나 광고 없이 만들었고, 실제 구매 전에는 최신
-        스펙과 가격을 꼭 확인해 주세요.
+        추천은 일반적인 소재 특성을 바탕으로 한 참고용이에요. 브랜드 제휴나 광고 없이 만들었고, 가격은 2026년 11월
+        판매처 표기 기준이라 구매 전에 꼭 다시 확인해 주세요.
       </p>
 
       {toast && <div className="toast">{toast}</div>}
@@ -152,7 +159,7 @@ function MatDetail({ sm }: { sm: ScoredMat }) {
         <span>{m.material}</span>
         <span>{m.thickness}</span>
         <span>{m.weight}</span>
-        <span>{PRICE_LABEL[m.priceTier]}</span>
+        <span>{priceText(m)}</span>
         {m.latex && <span className="warn">천연고무 포함</span>}
       </div>
 
@@ -202,8 +209,19 @@ function AltCard({ label, sm }: { label: string; sm: ScoredMat }) {
       </p>
       <p className="alt-tagline">{m.tagline}</p>
       <p className="alt-meta">
-        {PRICE_LABEL[m.priceTier]} · 매칭 {sm.match}%
+        {priceText(m)} · 매칭 {sm.match}%
       </p>
     </a>
   );
+}
+
+function getTips(m: Mat, optionIds: string[]): string[] {
+  const tips: string[] = [];
+  if (optionIds.includes("sweat-high") || m.attrs.gripWet <= 2)
+    tips.push("🧺 요가 핸드타월 하나 챙기기. 다운독 미끄럼이 확 줄어요");
+  tips.push("🚫 매트·타월 빨 때 섬유유연제 금지. 오히려 미끄러워져요");
+  if (m.latex) tips.push("🌬️ 새 매트는 하루 이틀 펼쳐두고 고무 냄새 빼기");
+  if (m.id.startsWith("manduka-pro")) tips.push("🧂 만두카 PRO는 처음에 미끄러워요. 굵은 소금으로 문질러 길들이는 사람도 많아요");
+  tips.push("🧽 땀 흘린 날은 닦고 그늘에서 말리기");
+  return tips;
 }

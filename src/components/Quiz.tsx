@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { QUESTIONS } from "@/data/questions";
+import { MATS } from "@/data/mats";
 import { decodeAnswers, encodeAnswers, scoreMats } from "@/lib/scoring";
 import { track } from "@/lib/track";
 import Result from "./Result";
@@ -126,7 +127,7 @@ export default function Quiz() {
     return (
       <section className="loading fade-in">
         <div className="spinner" aria-hidden />
-        <p>{name.trim() ? `${name.trim()}님이랑 ` : ""}매트 12종 궁합 보는 중…</p>
+        <p>{name.trim() ? `${name.trim()}님이랑 ` : ""}매트 {MATS.length}종 궁합 보는 중…</p>
       </section>
     );
   }

@@ -4,8 +4,10 @@ import { QUESTIONS, type Option } from "../data/questions";
 /** 예산 tier 1단계 초과당 감점 */
 const BUDGET_PENALTY = 15;
 const CENTER = 3;
+/** 예산 여유가 있는데 훨씬 싼 매트가 1등 되는 것 방지 (tier 1단계 아래당 감점) */
+const UNDERSPEND_PENALTY = 3;
 /** 모든 사용자에게 깔리는 기본 가중치 (요가매트의 기본기) */
-const BASE_WEIGHTS: Partial<Record<Attr, number>> = { gripDry: 1, stability: 1, durability: 1 };
+const BASE_WEIGHTS: Partial<Record<Attr, number>> = { gripDry: 1, stability: 1, durability: 1, cushion: 1 };
 
 export const REASON_TEXT: Record<Attr, string> = {
   gripDry: "마른 손에서도 그립이 단단해요",
@@ -72,6 +74,7 @@ export function scoreMats(answers: number[]): QuizResult {
       if (weights[a] > 0) contrib.push([a, c]);
     }
     if (mat.priceTier > budget) score -= BUDGET_PENALTY * (mat.priceTier - budget);
+    if (mat.priceTier < budget) score -= UNDERSPEND_PENALTY * (budget - mat.priceTier);
     // 이유: 기여도 높은 순 + 매트가 실제로 그 속성이 좋은(>=4) 것만
     const reasons = contrib
       .filter(([a]) => mat.attrs[a] >= 4)
