@@ -1,6 +1,10 @@
 import type { Metadata, Viewport } from "next";
 import Script from "next/script";
+import { Gaegu } from "next/font/google";
 import "./globals.css";
+
+/** 손글씨 폰트 (한글 포함 전체 글리프를 셀프호스팅 → 이미지 저장에도 그대로 나옴) */
+const hand = Gaegu({ weight: ["400", "700"], subsets: ["latin"], variable: "--font-hand", display: "swap" });
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 
@@ -17,12 +21,12 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#f6f1e9",
+  themeColor: "#2B3E2F",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="ko">
+    <html lang="ko" className={hand.variable}>
       <body>
         {children}
         {GA_ID && (
