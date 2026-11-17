@@ -47,10 +47,17 @@ export interface Mat {
   attrs: Record<Attr, number>;
   pros: string[];
   cons: string[];
-  /** 네이버쇼핑 검색어 (제휴 링크 아님) */
+  /** 네이버 검색어 (buyUrl 없을 때 사용, 제휴 링크 아님) */
   searchQuery: string;
-  /** 결과 카드 색 */
+  /** 공식몰 등 직접 링크가 있으면 네이버 검색 대신 이걸로 연결 */
+  buy?: { label: string; url: string };
+  /** 결과 카드 색 (사진 없을 때 일러스트 색으로도 사용) */
   color: string;
+  /**
+   * 매트 사진 경로. public/mats/<id>.jpg 를 넣고 "/mats/<id>.jpg" 로 지정.
+   * 직접 찍은 사진만 넣을 것 (브랜드 공식 이미지는 저작권 있음). 없으면 일러스트.
+   */
+  image?: string;
 }
 
 export const MATS: Mat[] = [
@@ -120,6 +127,10 @@ export const MATS: Mat[] = [
     pros: ["땀나도 쫀득한 PU 그립", "컬러가 예뻐서 사진발 최고"],
     cons: ["처음엔 고무 냄새", "상판이 오일·햇빛에 약해 관리 필요"],
     searchQuery: "룰루레몬 더매트 5mm",
+    buy: {
+      label: "룰루레몬 공식몰",
+      url: "https://www.lululemon.co.kr/ko-kr/p/%EB%8D%94-%EB%A7%A4%ED%8A%B8-5mm-*%EC%B2%9C%EC%97%B0%EA%B3%A0%EB%AC%B4-%EC%82%AC%EC%9A%A9/142152346.html",
+    },
     color: "#b5485d",
   },
   {
@@ -137,6 +148,7 @@ export const MATS: Mat[] = [
     pros: ["얇아서 서기 자세가 안정적", "5mm보다 가벼움"],
     cons: ["무릎 대는 자세는 살짝 딱딱", "처음엔 고무 냄새"],
     searchQuery: "룰루레몬 더매트 3mm",
+    buy: { label: "룰루레몬 공식몰", url: "https://www.lululemon.co.kr/ko-kr/c/yoga-mats" },
     color: "#d07a8a",
   },
   {
@@ -261,6 +273,18 @@ export const MATS: Mat[] = [
 ];
 
 export const MAT_BY_ID: Record<string, Mat> = Object.fromEntries(MATS.map((m) => [m.id, m]));
+
+/**
+ * 구매 링크. search.shopping.naver.com/search/all 은 봇 차단(418)·개편으로 깨지는 경우가 있어서
+ * 항상 열리는 네이버 통합검색으로 보냄 (상단에 네이버플러스스토어 쇼핑 영역이 같이 뜸).
+ */
+export function buyLink(m: Mat): { label: string; url: string } {
+  if (m.buy) return m.buy;
+  return {
+    label: "네이버",
+    url: `https://search.naver.com/search.naver?where=nexearch&query=${encodeURIComponent(m.searchQuery)}`,
+  };
+}
 
 export const PRICE_LABEL: Record<Mat["priceTier"], string> = {
   1: "₩ (~3만원)",

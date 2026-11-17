@@ -1,20 +1,21 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { PRICE_LABEL, type Mat } from "@/data/mats";
+import { PRICE_LABEL, buyLink } from "@/data/mats";
 import { QUESTIONS } from "@/data/questions";
 import type { QuizResult, ScoredMat } from "@/lib/scoring";
 import { obudUrl, track } from "@/lib/track";
+import MatVisual from "./MatVisual";
 
 interface Props {
   result: QuizResult;
   answers: number[];
+  /** 인트로에서 받은 이름. 공유 링크로 들어오면 비어 있을 수 있음 */
+  name: string;
   onRetry: () => void;
 }
 
-const naverShop = (m: Mat) => `https://search.shopping.naver.com/search/all?query=${encodeURIComponent(m.searchQuery)}`;
-
-export default function Result({ result, answers, onRetry }: Props) {
+export default function Result({ result, answers, name, onRetry }: Props) {
   const { persona, best, valuePick, longPick } = result;
   const cardRef = useRef<HTMLDivElement>(null);
   const [toast, setToast] = useState<string | null>(null);
@@ -35,7 +36,7 @@ export default function Result({ result, answers, onRetry }: Props) {
       const dataUrl = await toPng(cardRef.current, { pixelRatio: 3, cacheBust: true });
       const a = document.createElement("a");
       a.href = dataUrl;
-      a.download = `my-yoga-mat-${best.mat.id}.png`;
+      a.download = `${name || "my"}-yoga-mat-${best.mat.id}.png`;
       a.click();
       showToast("이미지 저장 완료! 스토리에 올려보세요 📸");
     } catch {
@@ -45,7 +46,9 @@ export default function Result({ result, answers, onRetry }: Props) {
 
   const share = async () => {
     const url = window.location.href;
-    const text = `나는 ${persona.emoji} ${persona.name}! 내 요가매트는 ${best.mat.name}`;
+    const text = name
+      ? `${name}님은 ${persona.emoji} ${persona.name}! 찰떡 요가매트는 ${best.mat.name}`
+      : `나는 ${persona.emoji} ${persona.name}! 내 요가매트는 ${best.mat.name}`;
     track("share", { mat: best.mat.id });
     if (navigator.share) {
       try {
@@ -64,7 +67,7 @@ export default function Result({ result, answers, onRetry }: Props) {
     <section className="result fade-in">
       {/* ---- 저장/공유용 카드 ---- */}
       <div ref={cardRef} className="share-card" style={{ ["--mat" as string]: best.mat.color }}>
-        <p className="share-eyebrow">나의 요가 유형은</p>
+        <p className="share-eyebrow">{name ? `${name}님 요가매트 추천` : "나의 요가매트 추천"}</p>
         <p className="persona-emoji">{persona.emoji}</p>
         <h1 className="persona-name">{persona.name}</h1>
         <p className="persona-desc">{persona.desc}</p>
@@ -127,6 +130,7 @@ function MatDetail({ sm }: { sm: ScoredMat }) {
   const m = sm.mat;
   return (
     <article className="mat-detail" style={{ ["--mat" as string]: m.color }}>
+      <MatVisual mat={m} height={170} className="hero" />
       <div className="mat-head">
         <span className="mat-emoji">{m.emoji}</span>
         <div>
@@ -169,12 +173,12 @@ function MatDetail({ sm }: { sm: ScoredMat }) {
 
       <a
         className="shop-link"
-        href={naverShop(m)}
+        href={buyLink(m).url}
         target="_blank"
         rel="noopener"
-        onClick={() => track("shop_click", { mat: m.id, slot: "best" })}
+        onClick={() => track("shop_click", { mat: m.id, slot: "best", store: buyLink(m).label })}
       >
-        네이버쇼핑에서 가격 보기 →
+        {buyLink(m).label}에서 가격 보기 →
       </a>
     </article>
   );
@@ -185,12 +189,13 @@ function AltCard({ label, sm }: { label: string; sm: ScoredMat }) {
   return (
     <a
       className="alt"
-      href={naverShop(m)}
+      href={buyLink(m).url}
       target="_blank"
       rel="noopener"
       style={{ ["--mat" as string]: m.color }}
-      onClick={() => track("shop_click", { mat: m.id, slot: label })}
+      onClick={() => track("shop_click", { mat: m.id, slot: label, store: buyLink(m).label })}
     >
+      <MatVisual mat={m} height={80} className="small" />
       <p className="alt-label">{label}</p>
       <p className="alt-name">
         {m.emoji} {m.name}
