@@ -1,0 +1,26 @@
+{
+  "name": "yoga-mat-finder",
+  "version": "0.1.0",
+  "private": true,
+  "description": "내 첫 요가매트 찾기 — 초보 요기니 매트 추천 퀴즈 (obud.dobby)",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "typecheck": "tsc --noEmit",
+    "dist": "tsx scripts/distribution.ts"
+  },
+  "dependencies": {
+    "html-to-image": "^1.11.13",
+    "next": "^16.4.6",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0"
+  }
+}
