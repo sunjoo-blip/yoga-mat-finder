@@ -6,6 +6,7 @@ import { QUESTIONS } from "@/data/questions";
 import { resolveOptions, type QuizResult, type ScoredMat } from "@/lib/scoring";
 import { obudUrl, track } from "@/lib/track";
 import MatVisual from "./MatVisual";
+import obudLogo from "@/app/obud_logo_circle.png";
 
 interface Props {
   result: QuizResult;
@@ -132,8 +133,11 @@ export default function Result({ result, answers, name, onRetry }: Props) {
         rel="noopener"
         onClick={() => track("obud_cta_click", { mat: best.mat.id })}
       >
-        <span className="cta-sub">매트 골랐으면 이제 첫 수업 👉</span>
-        <span className="cta-main">오붓에서 내 근처 요가원 찾기</span>
+        <img className="cta-logo" src={obudLogo.src} alt="오붓" width={52} height={52} />
+        <span className="cta-text">
+          <span className="cta-sub">매트 골랐으면 이제 첫 수업 👉</span>
+          <span className="cta-main">오붓에서 내 근처 요가원 찾기</span>
+        </span>
       </a>
 
       <div className="actions">

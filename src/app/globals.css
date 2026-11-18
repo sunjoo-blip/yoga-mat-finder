@@ -545,8 +545,8 @@ a {
 
 .cta {
   display: flex;
-  flex-direction: column;
-  gap: 0;
+  align-items: center;
+  gap: 14px;
   padding: 14px 20px;
   background: var(--ink);
   color: var(--paper-ink);
@@ -555,6 +555,18 @@ a {
 }
 .cta::after {
   border-color: rgba(255, 255, 255, 0.5);
+}
+.cta-logo {
+  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--paper, #fff);
+  padding: 3px;
+}
+.cta-text {
+  display: flex;
+  flex-direction: column;
 }
 .cta-sub {
   font-size: 18px;
