@@ -31,14 +31,39 @@ export default function Result({ result, answers, name, onRetry }: Props) {
   const saveImage = async () => {
     if (!cardRef.current) return;
     track("save_image", { mat: best.mat.id });
+    const fileName = `${name || "my"}-yoga-mat-${best.mat.id}.png`;
     try {
-      const { toPng } = await import("html-to-image");
-      const dataUrl = await toPng(cardRef.current, { pixelRatio: 3, cacheBust: true });
+      const { toBlob } = await import("html-to-image");
+      const blob = await toBlob(cardRef.current, { pixelRatio: 3, cacheBust: true });
+      if (!blob) throw new Error("no blob");
+
+      // iOS Safari는 <a download>를 무시한다. 파일 공유가 가능하면 공유 시트로 → "이미지 저장" 선택 가능.
+      const file = new File([blob], fileName, { type: "image/png" });
+      if (navigator.canShare?.({ files: [file] })) {
+        try {
+          await navigator.share({ files: [file] });
+          return;
+        } catch (err) {
+          // 사용자가 공유를 취소한 경우엔 조용히 종료
+          if (err instanceof DOMException && err.name === "AbortError") return;
+          // 그 외에는 아래 다운로드 폴백으로 진행
+        }
+      }
+
+      const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
-      a.href = dataUrl;
-      a.download = `${name || "my"}-yoga-mat-${best.mat.id}.png`;
-      a.click();
-      showToast("이미지 저장 완료! 스토리에 올려보세요 📸");
+      a.href = url;
+      a.download = fileName;
+      // download 속성이 동작하는 브라우저(데스크톱/안드로이드)
+      if ("download" in a && typeof a.download === "string") {
+        a.click();
+        showToast("이미지 저장 완료! 스토리에 올려보세요 📸");
+      } else {
+        // 최후 폴백: 새 탭으로 열어 길게 눌러 저장
+        window.open(url, "_blank");
+        showToast("이미지를 길게 눌러 저장해 주세요 📸");
+      }
+      setTimeout(() => URL.revokeObjectURL(url), 10000);
     } catch {
       showToast("저장에 실패했어요. 스크린샷으로 부탁해요 🙏");
     }
