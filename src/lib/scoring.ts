@@ -111,8 +111,6 @@ export function scoreMats(answers: number[]): QuizResult {
 export function getPersona(options: Option[]): Persona {
   const has = (id: string) => options.some((o) => o.id === id);
 
-  if (has("place-overlay"))
-    return { emoji: "🧳", name: "요가원 미니멀형", desc: "요가원 매트는 그대로, 위생은 확실하게" };
   if (has("sweat-high") && has("style-dynamic"))
     return { emoji: "🔥", name: "땀손 빈야사형", desc: "흐르는 땀도 그립으로 이겨내는 타입" };
   if (has("sweat-high"))
