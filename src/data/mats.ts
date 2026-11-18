@@ -256,14 +256,16 @@ export const MATS: Mat[] = [
     tagline: "정렬 라인이 그려진 '비싸고 예쁜 가네샤'",
     material: "PU 상판 + 천연고무",
     thickness: "4.2mm",
-    weight: "정렬 라인(AlignForMe) 프린트",
+    weight: "185×68cm · 정렬 라인 프린트",
     priceTier: 3,
+    price: "191,000원",
     latex: true,
     attrs: { gripDry: 5, gripWet: 5, cushion: 3, stability: 5, light: 2, durability: 4, value: 1, lowSmell: 3, design: 4 },
     pros: ["매트 위 정렬 라인이 초보 자세 교정에 도움", "그립 최상급"],
     cons: ["가격이 무지무지 비쌈", "무게가 있어 매일 들고 다니긴 부담"],
     searchQuery: "리포미 요가매트",
     color: "#5b6b8c",
+    image: "https://liforme.com/cdn/shop/files/Liforme_Classic_Black_Yoga_Mat_Frontview.png?width=800",
   },
   {
     id: "manduka-grp",
@@ -300,7 +302,7 @@ export const MATS: Mat[] = [
     cons: ["새 매트는 미끄러워서 길들이기 필요", "땀 많으면 수건 필요"],
     searchQuery: "만두카 프로라이트 요가매트",
     color: "#8a8f98",
-    image: "https://sitem.ssgcdn.com/36/69/29/item/1000033296936_i1_1200.jpg",
+    image: "https://www.manduka.com/cdn/shop/files/ProLite71-112011050-Mats-BlackSage-1019.jpg?width=800",
   },
   {
     id: "manduka-pro",
@@ -319,7 +321,7 @@ export const MATS: Mat[] = [
     cons: ["새 매트는 미끄러워서 길들이기 필요", "무거워서 매일 들고 다니긴 힘듦"],
     searchQuery: "만두카 프로 요가매트 6mm",
     color: "#2f2f35",
-    image: "https://sitem.ssgcdn.com/48/14/30/item/1000033301448_i1_1200.jpg",
+    image: "https://www.manduka.com/cdn/shop/products/111011460-Mats-Pro71-Elderberry-04.jpg?width=800",
   },
 ];
 
