@@ -27,7 +27,7 @@ export const QUESTIONS: Question[] = [
     title: "수련할 때 손발에 땀이 많은 편인가요?",
     hint: "다운독에서 손이 쭉 미끄러진 적 있다면 '네'",
     options: [
-      { id: "sweat-high", label: "네, 손이 미끄러져요 💦", weights: { gripWet: 4 } },
+      { id: "sweat-high", label: "네, 손이 미끄러져요 💦", weights: { gripWet: 6 } },
       { id: "sweat-mid", label: "보통이에요", weights: { gripWet: 1, gripDry: 1 } },
       { id: "sweat-low", label: "거의 안 나요", weights: { gripDry: 2 } },
     ],
@@ -74,7 +74,7 @@ export const QUESTIONS: Question[] = [
     id: "longevity",
     title: "매트를 얼마나 오래 쓰고 싶어요?",
     options: [
-      { id: "long-forever", label: "한 번 사서 평생 쓰고 싶어요", weights: { durability: 3 } },
+      { id: "long-forever", label: "한 번 사서 평생 쓰고 싶어요", weights: { durability: 5 } },
       { id: "long-mid", label: "1~2년 쓰고 바꿔도 괜찮아요", weights: { durability: 1, value: 1 } },
       { id: "long-try", label: "일단 해보고 계속할지 볼래요", weights: { value: 2 } },
     ],
@@ -93,7 +93,7 @@ export const QUESTIONS: Question[] = [
     id: "insta",
     title: "마지막! 매트 사진 인스타에 올릴 거예요? 📸",
     options: [
-      { id: "insta-yes", label: "당연하죠, 예뻐야 해요", weights: { design: 2 } },
+      { id: "insta-yes", label: "당연하죠, 예뻐야 해요", weights: { design: 3 } },
       { id: "insta-no", label: "기능만 좋으면 돼요", weights: {} },
     ],
   },

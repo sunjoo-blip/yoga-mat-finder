@@ -2,12 +2,12 @@ import { ATTRS, MATS, type Attr, type Mat } from "../data/mats";
 import { QUESTIONS, type Option } from "../data/questions";
 
 /** 예산 tier 1단계 초과당 감점 */
-const BUDGET_PENALTY = 15;
+const BUDGET_PENALTY = 40;
 const CENTER = 3;
 /** 예산 여유가 있는데 훨씬 싼 매트가 1등 되는 것 방지 (tier 1단계 아래당 감점) */
 const UNDERSPEND_PENALTY = 3;
 /** 모든 사용자에게 깔리는 기본 가중치 (요가매트의 기본기) */
-const BASE_WEIGHTS: Partial<Record<Attr, number>> = { gripDry: 1, stability: 1, durability: 1, cushion: 1 };
+const BASE_WEIGHTS: Partial<Record<Attr, number>> = { gripDry: 1, stability: 1, cushion: 1 };
 
 export const REASON_TEXT: Record<Attr, string> = {
   gripDry: "마른 손에서도 그립이 단단해요",
