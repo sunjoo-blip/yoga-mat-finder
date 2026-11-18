@@ -149,8 +149,7 @@ export default function Result({ result, answers, name, onRetry }: Props) {
       </div>
 
       <p className="disclaimer">
-        추천은 일반적인 소재 특성을 바탕으로 한 참고용이에요. 브랜드 제휴나 광고 없이 만들었고, 가격은 2026년 11월
-        판매처 표기 기준이라 구매 전에 꼭 다시 확인해 주세요.
+        추천은 일반적인 소재 특성을 바탕으로 한 참고용, 브랜드 제휴, 광고 없음
       </p>
 
       {toast && <div className="toast">{toast}</div>}
