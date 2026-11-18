@@ -606,10 +606,16 @@ a {
   place-items: center;
   background: var(--paper);
 }
+.mat-visual.photo {
+  display: block; /* grid면 img height:100%가 안 먹어서 세로 사진이 위만 보이고 잘림 */
+  background: #fff;
+}
 .mat-visual img {
+  display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain; /* 상품 사진은 세로·정사각이 많아서 잘리지 않게 */
+  padding: 6px;
 }
 .mat-visual svg {
   width: 88%;

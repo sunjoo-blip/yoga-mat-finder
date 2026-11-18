@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import type { Mat } from "@/data/mats";
 
 interface Props {
@@ -9,15 +12,27 @@ interface Props {
 
 /**
  * 매트 이미지.
- * - mat.image 가 있으면 사진 (public/mats/<id>.jpg 등)
- * - 없으면 매트 색·두께·소재로 그린 롤 매트 일러스트 (브랜드 로고 없음)
+ * - mat.image 가 있으면 상품 사진 (판매처 이미지 URL 또는 public/mats/)
+ * - 없거나 로드 실패하면 매트 색·두께·소재로 그린 롤 매트 일러스트
  */
 export default function MatVisual({ mat, height = 140, className = "" }: Props) {
-  if (mat.image) {
+  const [failed, setFailed] = useState(false);
+  if (mat.image && !failed) {
     return (
-      <div className={`mat-visual ${className}`} style={{ height }}>
+      <div className={`mat-visual photo ${className}`} style={{ height }}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={mat.image} alt={mat.name} />
+        <img
+          src={mat.image}
+          alt={mat.name}
+          loading="lazy"
+          style={
+            mat.imageFit === "cover"
+              ? { objectFit: "cover", objectPosition: mat.imagePosition ?? "50% 50%", padding: 0 }
+              : undefined
+          }
+          referrerPolicy="no-referrer"
+          onError={() => setFailed(true)}
+        />
       </div>
     );
   }

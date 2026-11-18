@@ -36,10 +36,10 @@ export const QUESTIONS: Question[] = [
     id: "place",
     title: "매트를 주로 어디서 쓸 건가요?",
     options: [
-      { id: "place-studio", label: "요가원에 두고 쓸 거예요 🧘", weights: {} },
+      { id: "place-carry", label: "요가원에 매번 들고 다닐 거예요 🎒", weights: { light: 3 } },
       { id: "place-home", label: "집에서 홈요가 위주예요 🏠", weights: { cushion: 1, stability: 1 } },
+      { id: "place-overlay", label: "요가원 매트 위에 깔 위생용이 필요해요", weights: { light: 5, cushion: -2 } },
       { id: "place-both", label: "집이랑 요가원 반반", weights: { light: 1 } },
-      { id: "place-carry", label: "매번 들고 다닐 거예요 🎒", weights: { light: 3 } },
     ],
   },
   {
@@ -65,7 +65,7 @@ export const QUESTIONS: Question[] = [
     id: "budget",
     title: "매트 예산은 어느 정도예요?",
     options: [
-      { id: "budget-low", label: "3만원 이하 💸", weights: { value: 4 }, budget: 1 },
+      { id: "budget-low", label: "3만원 안팎 💸", weights: { value: 4 }, budget: 1 },
       { id: "budget-mid", label: "10만원 이하", weights: { value: 1 }, budget: 2 },
       { id: "budget-high", label: "좋은 거면 상관없어요 💎", weights: {}, budget: 3 },
     ],

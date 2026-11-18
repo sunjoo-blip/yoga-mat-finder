@@ -12,7 +12,7 @@ export function track(event: string, params: Record<string, string | number | bo
 }
 
 export function obudUrl(matId: string) {
-  const base = process.env.NEXT_PUBLIC_OBUD_URL || "https://obud.co";
+  const base = process.env.NEXT_PUBLIC_OBUD_URL || "https://obud.co/discover";
   const u = new URL(base);
   u.searchParams.set("utm_source", "mat_quiz");
   u.searchParams.set("utm_medium", "web");
