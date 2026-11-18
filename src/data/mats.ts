@@ -50,10 +50,8 @@ export interface Mat {
   attrs: Record<Attr, number>;
   pros: string[];
   cons: string[];
-  /** 네이버 검색어 (buy 없을 때 사용, 제휴 링크 아님) */
+  /** 네이버 통합검색어 (제휴 링크 아님) */
   searchQuery: string;
-  /** 판매처 직접 링크. 있으면 네이버 검색 대신 이걸로 연결 */
-  buy?: { label: string; url: string };
   /** 결과 카드 색 (사진 없을 때 일러스트 색으로도 사용) */
   color: string;
   /**
@@ -85,7 +83,6 @@ export const MATS: Mat[] = [
     pros: ["커피 한 잔 값", "두툼해서 무릎·허리 대는 동작이 편함"],
     cons: ["푹신해서 서기·밸런스 자세는 흔들림", "새 제품은 고무 냄새가 있다는 후기 많음"],
     searchQuery: "다이소 NBR 요가매트",
-    buy: { label: "다이소몰", url: "https://www.daisomall.co.kr/pd/pdr/SCR_PDR_0001?pdNo=1057546" },
     color: "#6c9a6a",
     image: "https://cdn.daisomall.co.kr/file/PD/20250102/ePjoJs3kWBcAPXjo9Pn11057546_00_00ePjoJs3kWBcAPXjo9Pn1.jpg",
     imageFit: "cover",
@@ -107,7 +104,6 @@ export const MATS: Mat[] = [
     pros: ["가볍고 냄새 적음", "요가 자세용으론 NBR보다 안정적"],
     cons: ["땀나면 미끄러움 (핸드타월 필수)", "길이 173cm라 키 크면 짧을 수 있음"],
     searchQuery: "다이소 TPE 요가매트",
-    buy: { label: "다이소몰", url: "https://www.daisomall.co.kr/pd/pdr/SCR_PDR_0001?pdNo=1057545" },
     color: "#8a8a5c",
     image: "https://cdn.daisomall.co.kr/file/PD/20250102/XKAfvIuKbRyuftFXME7h1057545_00_00XKAfvIuKbRyuftFXME7h.jpg",
     imageFit: "cover",
@@ -129,7 +125,6 @@ export const MATS: Mat[] = [
     pros: ["표면 패턴 덕에 자세 잡기 쉬움", "가볍고 냄새 거의 없음"],
     cons: ["땀 많으면 수건 필요", "고무 매트보단 쫀득함이 덜함"],
     searchQuery: "밸런시스 TPE 요가매트",
-    buy: { label: "11번가", url: "https://www.11st.co.kr/products/1521267590" },
     color: "#8fa0b4",
     image: "https://cdn.011st.com/11dims/resize/720/11src/opt/2/6/7/5/9/0/1521267590/sjdFm/34394133965_B.webp",
   },
@@ -151,7 +146,6 @@ export const MATS: Mat[] = [
     pros: ["PU 코팅이라 땀나도 잘 안 미끄러움", "컬러가 다양하고 예쁨"],
     cons: ["고무라 무게가 좀 있음", "요가원 선생님 통해 싸게 사는 경우도 많음 (물어보기!)"],
     searchQuery: "가네샤 요가매트 오리진 5mm",
-    buy: { label: "코오롱몰", url: "https://www.kolonmall.com/Brands/ganesha/Product/K1756361782741044NO14" },
     color: "#8c7aa8",
     image: "https://images.kolonmall.com/Prod_Img/10003391/2024/LM4/K1756361782741044NO14_LM4.jpg",
     imageFit: "cover",
@@ -172,7 +166,6 @@ export const MATS: Mat[] = [
     pros: ["6mm 쿠션 + PU 그립 조합", "무릎 대는 동작이 편함"],
     cons: ["무거워서 들고 다니긴 부담", "천연고무 포함"],
     searchQuery: "가네샤 요가매트 울트라컴포트 6mm",
-    buy: { label: "코오롱몰", url: "https://www.kolonmall.com/Brands/ganesha/Product/K1756433905271027NO01" },
     color: "#6b7f99",
     image: "https://images.kolonmall.com/Prod_Img/10003391/2024/LM5/K1756433905271027NO01_LM5.jpg",
     imageFit: "cover",
@@ -193,7 +186,6 @@ export const MATS: Mat[] = [
     pros: ["요가원 공용 매트 위생 걱정 끝", "여행·출장에도 챙기기 쉬움"],
     cons: ["단독으로 쓰기엔 쿠션 없음", "천연고무 냄새가 처음에 있음"],
     searchQuery: "만두카 에코 슈퍼라이트 1.5mm",
-    buy: { label: "코오롱몰", url: "https://www.kolonmall.com/Product/W2AAX25017LGR" },
     color: "#3d4a66",
     image: "https://images.kolonmall.com/Prod_Img/JA/2025/LM1/W2AAX25017LGR_LM1.jpg",
   },
@@ -215,10 +207,6 @@ export const MATS: Mat[] = [
     pros: ["땀나도 쫀득한 PU 그립", "물결무늬·컬러가 예뻐서 사진발 최고"],
     cons: ["처음엔 고무 냄새", "평생템까진 아님 (오래 쓰면 그립 감소)"],
     searchQuery: "룰루레몬 더매트 5mm",
-    buy: {
-      label: "룰루레몬 공식몰",
-      url: "https://www.lululemon.co.kr/ko-kr/p/%EB%8D%94-%EB%A7%A4%ED%8A%B8-5mm-*%EC%B2%9C%EC%97%B0%EA%B3%A0%EB%AC%B4-%EC%82%AC%EC%9A%A9/142152346.html",
-    },
     color: "#b5485d",
     image: "https://images.lululemon.com/is/image/lululemon/LU9CJ7S_0001_1?size=800,800",
   },
@@ -237,7 +225,6 @@ export const MATS: Mat[] = [
     pros: ["얇아서 서기 자세가 안정적", "5mm보다 600g 가벼움"],
     cons: ["무릎 대는 자세는 살짝 딱딱", "처음엔 고무 냄새"],
     searchQuery: "룰루레몬 더매트 3mm",
-    buy: { label: "룰루레몬 공식몰", url: "https://www.lululemon.co.kr/ko-kr/c/yoga-mats" },
     color: "#d07a8a",
     image: "https://images.lululemon.com/is/image/lululemon/LU9CJ1S_0001_1?size=800,800",
   },
@@ -292,7 +279,6 @@ export const MATS: Mat[] = [
     pros: ["PRO 라인 내구성 그대로", "요가원 출퇴근 가능한 무게"],
     cons: ["새 매트는 미끄러워서 길들이기 필요", "땀 많으면 수건 필요"],
     searchQuery: "만두카 프로라이트 요가매트",
-    buy: { label: "SSG (해외직배송)", url: "https://www.ssg.com/item/itemView.ssg?itemId=1000033296936" },
     color: "#8a8f98",
     image: "https://sitem.ssgcdn.com/36/69/29/item/1000033296936_i1_1200.jpg",
   },
@@ -312,7 +298,6 @@ export const MATS: Mat[] = [
     pros: ["쿠션·안정감·내구성 끝판왕", "땀이 스며들지 않아 위생적"],
     cons: ["새 매트는 미끄러워서 길들이기 필요", "무거워서 매일 들고 다니긴 힘듦"],
     searchQuery: "만두카 프로 요가매트 6mm",
-    buy: { label: "SSG (해외직배송)", url: "https://www.ssg.com/item/itemView.ssg?itemId=1000033301448" },
     color: "#2f2f35",
     image: "https://sitem.ssgcdn.com/48/14/30/item/1000033301448_i1_1200.jpg",
   },
@@ -321,11 +306,11 @@ export const MATS: Mat[] = [
 export const MAT_BY_ID: Record<string, Mat> = Object.fromEntries(MATS.map((m) => [m.id, m]));
 
 /**
- * 구매 링크. search.shopping.naver.com/search/all 은 봇 차단(418)·개편으로 깨지는 경우가 있어서
- * 판매처 링크가 없으면 항상 열리는 네이버 통합검색으로 보냄.
+ * 구매 링크. 전부 네이버 통합검색으로 보냄 — 쇼핑검색(search.shopping.naver.com)은
+ * 봇 차단(418)·개편으로 깨지고, 판매처 직링크는 가격·재고가 수시로 바뀌어 썩기 쉬움.
+ * 통합검색이면 최저가 비교·후기까지 한 화면에 떠서 초보자에게도 더 유용.
  */
 export function buyLink(m: Mat): { label: string; url: string } {
-  if (m.buy) return m.buy;
   return {
     label: "네이버",
     url: `https://search.naver.com/search.naver?where=nexearch&query=${encodeURIComponent(m.searchQuery)}`,
@@ -333,9 +318,9 @@ export function buyLink(m: Mat): { label: string; url: string } {
 }
 
 export const PRICE_LABEL: Record<Mat["priceTier"], string> = {
-  1: "₩ (~3만원)",
-  2: "₩₩ (3~10만원)",
-  3: "₩₩₩ (10만원+)",
+  1: "~3만원",
+  2: "3~10만원",
+  3: "10만원+",
 };
 
 export const priceText = (m: Mat) => m.price ?? PRICE_LABEL[m.priceTier];
