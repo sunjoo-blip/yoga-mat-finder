@@ -9,6 +9,8 @@ const hand = Gaegu({ weight: ["400", "700"], subsets: ["latin"], variable: "--fo
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 
 export const metadata: Metadata = {
+  // og:image 절대경로용 (src/app/opengraph-image.png 자동 연결)
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://yoga-mat-finder.vercel.app"),
   title: "내 첫 요가매트 찾기 | 질문 8개로 끝내는 매트 고민",
   description: "땀손? 무릎 예민? 가성비? 질문 8개에 답하면 나한테 맞는 요가매트를 골라드려요.",
   openGraph: {
@@ -16,6 +18,7 @@ export const metadata: Metadata = {
     description: "질문 8개, 1분이면 매트 고민 끝",
     type: "website",
   },
+  twitter: { card: "summary_large_image" },
 };
 
 export const viewport: Viewport = {
