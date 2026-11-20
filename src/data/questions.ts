@@ -9,6 +9,8 @@ export interface Option {
   budget?: 1 | 2 | 3;
   /** 천연고무 매트 제외 */
   excludeLatex?: boolean;
+  /** 무거운 매트(light ≤ 2) 감점 — 매번 들고 다니는 사람용 */
+  avoidHeavy?: boolean;
 }
 
 export interface Question {
@@ -39,7 +41,7 @@ export const QUESTIONS: Question[] = [
       { id: "place-studio", label: "요가원에 두고 쓸 거예요 🧘", weights: {} },
       { id: "place-home", label: "집에서 홈요가 위주예요 🏠", weights: { cushion: 1, stability: 1 } },
       { id: "place-both", label: "집이랑 요가원 반반", weights: { light: 1 } },
-      { id: "place-carry", label: "매번 들고 다닐 거예요 🎒", weights: { light: 3 } },
+      { id: "place-carry", label: "매번 들고 다닐 거예요 🎒", weights: { light: 3 }, avoidHeavy: true },
     ],
   },
   {

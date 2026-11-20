@@ -131,6 +131,25 @@ export const MATS: Mat[] = [
 
   /* ---------------- 3~10만원 ---------------- */
   {
+    id: "vishnu-immersion",
+    name: "비슈누 몰입매트 5mm",
+    brand: "비슈누",
+    emoji: "🧭",
+    tagline: "땀손 초보의 첫 PU 매트, 가이드라인까지",
+    material: "PU 상판 + 천연고무",
+    thickness: "5mm",
+    weight: "정렬 가이드라인 · 컬러 5종",
+    priceTier: 2,
+    price: "49,000원",
+    latex: true,
+    attrs: { gripDry: 5, gripWet: 4, cushion: 3, stability: 4, light: 2, durability: 3, value: 4, lowSmell: 2, design: 3 },
+    pros: ["PU 표면이라 땀나도 손이 착 붙음", "매트에 정렬 가이드라인이 있어 초보 자세 잡기 좋음"],
+    cons: ["천연고무라 무게가 있어 들고 다니긴 부담", "새 매트 고무 냄새가 난다는 후기도 있음"],
+    searchQuery: "비슈누 몰입매트 5mm",
+    color: "#3f7f6e",
+    image: "/mats/vishnu-immersion.jpg",
+  },
+  {
     id: "ganesha-origin",
     name: "가네샤 요가매트 오리진 5mm",
     brand: "가네샤 요가프랍스",

@@ -4,6 +4,8 @@ import { QUESTIONS, type Option } from "../data/questions";
 /** 예산 tier 1단계 초과당 감점 */
 const BUDGET_PENALTY = 40;
 const CENTER = 3;
+/** 매번 들고 다니는 사람에게 무거운 매트(light ≤ 2) 감점 */
+const HEAVY_PENALTY = 40;
 /** 예산 여유가 있는데 훨씬 싼 매트가 1등 되는 것 방지 (tier 1단계 아래당 감점) */
 const UNDERSPEND_PENALTY = 3;
 /** 모든 사용자에게 깔리는 기본 가중치 (요가매트의 기본기) */
@@ -61,6 +63,7 @@ export function scoreMats(answers: number[]): QuizResult {
   const weights = buildWeights(options);
   const budget = options.find((o) => o.budget)?.budget ?? 3;
   const excludeLatex = options.some((o) => o.excludeLatex);
+  const avoidHeavy = options.some((o) => o.avoidHeavy);
 
   const candidates = MATS.filter((m) => !(excludeLatex && m.latex));
 
@@ -75,6 +78,7 @@ export function scoreMats(answers: number[]): QuizResult {
     }
     if (mat.priceTier > budget) score -= BUDGET_PENALTY * (mat.priceTier - budget);
     if (mat.priceTier < budget) score -= UNDERSPEND_PENALTY * (budget - mat.priceTier);
+    if (avoidHeavy && mat.attrs.light <= 2) score -= HEAVY_PENALTY;
     // 이유: 기여도 높은 순 + 매트가 실제로 그 속성이 좋은(>=4) 것만
     const reasons = contrib
       .filter(([a]) => mat.attrs[a] >= 4)
